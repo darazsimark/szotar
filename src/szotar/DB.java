@@ -73,7 +73,7 @@ public class DB {
         if (angol.isEmpty() || magyar.isEmpty())
             return 0;
         String s = "UPDATE szavak SET lecke=?, angol=?, magyar=? "
-                 + "WHERE szoid=?";
+                 + "WHERE szoid=?;";
         try (Connection kapcs = DriverManager.getConnection(dbUrl, user, pass);
                 PreparedStatement parancs = kapcs.prepareStatement(s)) {
             if (lecke.isEmpty())
@@ -87,6 +87,17 @@ public class DB {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             return 0;
+        }
+    }
+    
+    public void torol(int szoid) {
+        String s = "DELETE FROM szavak WHERE szoid=?;";
+        try (Connection kapcs = DriverManager.getConnection(dbUrl, user, pass);
+                PreparedStatement parancs = kapcs.prepareStatement(s)) {
+            parancs.setInt(1, szoid);
+            parancs.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
 }

@@ -170,6 +170,11 @@ public class Ablak extends javax.swing.JFrame {
 
         btnTorol.setMnemonic('T');
         btnTorol.setText("Töröl");
+        btnTorol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTorolActionPerformed(evt);
+            }
+        });
 
         btnSzurtorol.setMnemonic('S');
         btnSzurtorol.setText("Szűrőket törli");
@@ -348,6 +353,13 @@ public class Ablak extends javax.swing.JFrame {
             kijelol(szoid);
         }
     }//GEN-LAST:event_btnModositActionPerformed
+
+    private void btnTorolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTorolActionPerformed
+        int i = tblSzavak.getSelectedRow();
+        if (i == -1) return;
+        ab.torol(Integer.parseInt(tblSzavak.getValueAt(i, 0).toString()));
+        ab.beolvas(tblSzavak, lekerdez());
+    }//GEN-LAST:event_btnTorolActionPerformed
 
     /**
      * @param args the command line arguments

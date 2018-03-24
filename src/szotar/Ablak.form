@@ -226,6 +226,9 @@
         <Property name="mnemonic" type="int" value="84"/>
         <Property name="text" type="java.lang.String" value="T&#xf6;r&#xf6;l"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTorolActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSzurtorol">
       <Properties>
