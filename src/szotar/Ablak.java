@@ -10,13 +10,14 @@ package szotar;
  * @author Darázsi Márk
  */
 public class Ablak extends javax.swing.JFrame {
+    
+    DB ab = new DB();
 
     /**
      * Creates new form Ablak
      */
     public Ablak() {
         initComponents();
-        DB ab = new DB();
         ab.beolvas(tblSzavak, lekerdez());
     }
     
@@ -28,6 +29,8 @@ public class Ablak extends javax.swing.JFrame {
         q = q + " magyar LIKE '%" + txtMagyarSzur.getText().trim() + "%' ";
         return "SELECT * FROM szavak WHERE " + q + " ORDER BY lecke;";
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -85,6 +88,24 @@ public class Ablak extends javax.swing.JFrame {
             tblSzavak.getColumnModel().getColumn(2).setPreferredWidth(300);
             tblSzavak.getColumnModel().getColumn(3).setPreferredWidth(300);
         }
+
+        txtLeckeSzur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLeckeSzurActionPerformed(evt);
+            }
+        });
+
+        txtAngolSzur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAngolSzurActionPerformed(evt);
+            }
+        });
+
+        txtMagyarSzur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMagyarSzurActionPerformed(evt);
+            }
+        });
 
         jLabel1.setDisplayedMnemonic('L');
         jLabel1.setLabelFor(txtLecke);
@@ -196,6 +217,18 @@ public class Ablak extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtLeckeSzurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLeckeSzurActionPerformed
+        ab.beolvas(tblSzavak, lekerdez());
+    }//GEN-LAST:event_txtLeckeSzurActionPerformed
+
+    private void txtAngolSzurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAngolSzurActionPerformed
+        ab.beolvas(tblSzavak, lekerdez());
+    }//GEN-LAST:event_txtAngolSzurActionPerformed
+
+    private void txtMagyarSzurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMagyarSzurActionPerformed
+        ab.beolvas(tblSzavak, lekerdez());
+    }//GEN-LAST:event_txtMagyarSzurActionPerformed
 
     /**
      * @param args the command line arguments
