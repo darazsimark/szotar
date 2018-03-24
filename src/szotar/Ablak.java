@@ -124,6 +124,11 @@ public class Ablak extends javax.swing.JFrame {
 
         btnSzurtorol.setMnemonic('S');
         btnSzurtorol.setText("Szűrőket törli");
+        btnSzurtorol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSzurtorolActionPerformed(evt);
+            }
+        });
 
         btnHozzaAd.setMnemonic('H');
         btnHozzaAd.setText("Hozzáad");
@@ -229,6 +234,13 @@ public class Ablak extends javax.swing.JFrame {
     private void txtMagyarSzurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMagyarSzurActionPerformed
         ab.beolvas(tblSzavak, lekerdez());
     }//GEN-LAST:event_txtMagyarSzurActionPerformed
+
+    private void btnSzurtorolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSzurtorolActionPerformed
+        txtLeckeSzur.setText("");
+        txtAngolSzur.setText("");
+        txtMagyarSzur.setText("");
+        ab.beolvas(tblSzavak, lekerdez());
+    }//GEN-LAST:event_btnSzurtorolActionPerformed
 
     /**
      * @param args the command line arguments
