@@ -43,6 +43,21 @@ public class Ablak extends javax.swing.JFrame {
         txtAngol.setText(tblSzavak.getValueAt(i, 2).toString());
         txtMagyar.setText(tblSzavak.getValueAt(i, 3).toString());
     }
+    
+    private void uj_kijelol() {
+        int sordb = tblSzavak.getRowCount();
+        int max = 0;
+        int sor = 0;
+        for (int i = 0; i < sordb; i++) {
+            int n = Integer.parseInt(tblSzavak.getValueAt(i, 0).toString());
+            if (n > max) {
+                max = n;
+                sor = i;
+            }
+        }
+        tblSzavak.setRowSelectionInterval(sor, sor);
+        tablabol();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -154,12 +169,22 @@ public class Ablak extends javax.swing.JFrame {
 
         btnHozzaAd.setMnemonic('H');
         btnHozzaAd.setText("Hozzáad");
+        btnHozzaAd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHozzaAdActionPerformed(evt);
+            }
+        });
 
         btnModosit.setMnemonic('d');
         btnModosit.setText("Módosít");
 
         btnUj.setMnemonic('j');
         btnUj.setText("Új");
+        btnUj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUjActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -275,6 +300,25 @@ public class Ablak extends javax.swing.JFrame {
             || evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN)
             tablabol();
     }//GEN-LAST:event_tblSzavakKeyReleased
+
+    private void btnUjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUjActionPerformed
+        txtAngol.setText("");
+        txtMagyar.setText("");
+        txtLecke.requestFocus();
+        txtLecke.selectAll();
+    }//GEN-LAST:event_btnUjActionPerformed
+
+    private void btnHozzaAdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHozzaAdActionPerformed
+        int n = ab.hozzaad(txtLecke.getText(),
+                           txtAngol.getText(),
+                           txtMagyar.getText());
+        if (n > 0) {
+            ab.beolvas(tblSzavak, lekerdez());
+            uj_kijelol();
+            txtAngol.requestFocus();
+            txtAngol.selectAll();
+        }
+    }//GEN-LAST:event_btnHozzaAdActionPerformed
 
     /**
      * @param args the command line arguments
