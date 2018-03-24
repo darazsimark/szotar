@@ -58,6 +58,18 @@ public class Ablak extends javax.swing.JFrame {
         tblSzavak.setRowSelectionInterval(sor, sor);
         tablabol();
     }
+    
+    private void kijelol(int szoid) {
+        int sordb = tblSzavak.getRowCount();
+        for (int i = 0; i < sordb; i++) {
+            int id = Integer.parseInt(tblSzavak.getValueAt(i, 0).toString());
+            if (id == szoid) {
+                tblSzavak.setRowSelectionInterval(i, i);
+                tablabol();
+                break;
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -177,6 +189,11 @@ public class Ablak extends javax.swing.JFrame {
 
         btnModosit.setMnemonic('d');
         btnModosit.setText("Módosít");
+        btnModosit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModositActionPerformed(evt);
+            }
+        });
 
         btnUj.setMnemonic('j');
         btnUj.setText("Új");
@@ -319,6 +336,18 @@ public class Ablak extends javax.swing.JFrame {
             txtAngol.selectAll();
         }
     }//GEN-LAST:event_btnHozzaAdActionPerformed
+
+    private void btnModositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModositActionPerformed
+        int i = tblSzavak.getSelectedRow();
+        if (i == -1) return;
+        int szoid = Integer.parseInt(tblSzavak.getValueAt(i, 0).toString());
+        int n = ab.modosit(szoid, txtLecke.getText(),
+                           txtAngol.getText(), txtMagyar.getText());
+        if (n>0) {
+            ab.beolvas(tblSzavak, lekerdez());
+            kijelol(szoid);
+        }
+    }//GEN-LAST:event_btnModositActionPerformed
 
     /**
      * @param args the command line arguments

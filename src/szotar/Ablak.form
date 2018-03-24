@@ -250,6 +250,9 @@
         <Property name="mnemonic" type="int" value="100"/>
         <Property name="text" type="java.lang.String" value="M&#xf3;dos&#xed;t"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModositActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnUj">
       <Properties>
