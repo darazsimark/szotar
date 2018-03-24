@@ -5,6 +5,8 @@
  */
 package szotar;
 
+import com.sun.glass.events.KeyEvent;
+
 /**
  *
  * @author Darázsi Márk
@@ -30,7 +32,17 @@ public class Ablak extends javax.swing.JFrame {
         return "SELECT * FROM szavak WHERE " + q + " ORDER BY lecke;";
     }
     
-    
+    private void tablabol() {
+        int i = tblSzavak.getSelectedRow();
+        if ( i == -1) return;
+        Object e = tblSzavak.getValueAt(i, 1);
+        if ( e != null)
+            txtLecke.setText(e.toString());
+        else
+            txtLecke.setText("");
+        txtAngol.setText(tblSzavak.getValueAt(i, 2).toString());
+        txtMagyar.setText(tblSzavak.getValueAt(i, 3).toString());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,6 +92,16 @@ public class Ablak extends javax.swing.JFrame {
             }
         });
         tblSzavak.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblSzavak.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblSzavakMouseReleased(evt);
+            }
+        });
+        tblSzavak.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblSzavakKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblSzavak);
         if (tblSzavak.getColumnModel().getColumnCount() > 0) {
             tblSzavak.getColumnModel().getColumn(0).setMinWidth(0);
@@ -241,6 +263,18 @@ public class Ablak extends javax.swing.JFrame {
         txtMagyarSzur.setText("");
         ab.beolvas(tblSzavak, lekerdez());
     }//GEN-LAST:event_btnSzurtorolActionPerformed
+
+    private void tblSzavakMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSzavakMouseReleased
+        tablabol();
+    }//GEN-LAST:event_tblSzavakMouseReleased
+
+    private void tblSzavakKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblSzavakKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_UP
+            || evt.getKeyCode() == KeyEvent.VK_DOWN
+            || evt.getKeyCode() == KeyEvent.VK_PAGE_UP
+            || evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN)
+            tablabol();
+    }//GEN-LAST:event_tblSzavakKeyReleased
 
     /**
      * @param args the command line arguments
