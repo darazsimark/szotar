@@ -7,7 +7,7 @@ package szotar;
 
 /**
  *
- * @author t1
+ * @author Darázsi Márk
  */
 public class Ablak extends javax.swing.JFrame {
 
@@ -16,6 +16,17 @@ public class Ablak extends javax.swing.JFrame {
      */
     public Ablak() {
         initComponents();
+        DB ab = new DB();
+        ab.beolvas(tblSzavak, lekerdez());
+    }
+    
+    private String lekerdez() {
+        String q = "";
+        if (!txtLeckeSzur.getText().trim().isEmpty())
+            q = q + " lecke LIKE '%" + txtLeckeSzur.getText().trim() + "%' AND ";
+        q = q + " angol LIKE '%" + txtAngolSzur.getText().trim() + "%' AND ";
+        q = q + " magyar LIKE '%" + txtMagyarSzur.getText().trim() + "%' ";
+        return "SELECT * FROM szavak WHERE " + q + " ORDER BY lecke;";
     }
 
     /**
